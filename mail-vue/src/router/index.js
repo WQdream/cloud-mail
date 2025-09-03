@@ -116,7 +116,7 @@ router.beforeEach((to, from, next) => {
 })
 
 function loadBackground(next) {
-    console.log(131231)
+    console.log(6666)
     const settingStore = useSettingStore();
     const src = cvtR2Url(settingStore.settings.background);
 
