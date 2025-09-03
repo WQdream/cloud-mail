@@ -51,12 +51,12 @@ onMounted(() => {
 
 
 watch(() => accountStore.currentAccountId, () => {
-  scroll.value.refreshList();
+  scroll.value?.refreshList();
 })
 
 function changeTimeSort() {
   params.timeSort = params.timeSort ? 0 : 1
-  scroll.value.refreshList();
+  scroll.value?.refreshList();
 }
 
 function jumpContent(email) {
@@ -71,9 +71,9 @@ const existIds = new Set();
 
 async function latest() {
   while (true) {
-    const latestId = scroll.value.latestEmail?.emailId || 0
+    const latestId = scroll.value?.latestEmail?.emailId || 0
 
-    if (!scroll.value.firstLoad && settingStore.settings.autoRefreshTime) {
+    if (!scroll.value?.firstLoad && settingStore.settings.autoRefreshTime) {
       try {
         const accountId = accountStore.currentAccountId
         const curTimeSort = params.timeSort
@@ -83,7 +83,7 @@ async function latest() {
 
             list.forEach(email => {
               existIds.add(email.emailId)
-              scroll.value.addItem(email)
+              scroll.value?.addItem(email)
             })
 
           }

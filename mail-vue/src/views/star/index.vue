@@ -37,7 +37,7 @@ function jumpContent(email) {
 
 function cancelStar(email) {
   emailStore.cancelStarEmailId = email.emailId
-  scroll.value.deleteEmail([email.emailId])
+  scroll.value?.deleteEmail([email.emailId])
 }
 
 onMounted(() => {

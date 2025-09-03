@@ -257,13 +257,17 @@ defineExpose({
 })
 
 onActivated(() => {
-  scroll.value.scrollTop = scrollTop
+  if (scroll.value) {
+    scroll.value.scrollTop = scrollTop
+  }
 })
 
 getEmailList()
 
 onBeforeRouteLeave(() => {
-  scrollTop = scroll.value.scrollTop
+  if (scroll.value) {
+    scrollTop = scroll.value.scrollTop
+  }
 })
 
 watch(
@@ -528,7 +532,7 @@ function getEmailList(refresh = false) {
 function refresh() {
   emit('refresh-before')
   if (props.skeleton) {
-    scrollbarRef.value.setScrollTop(0)
+    scrollbarRef.value?.setScrollTop(0)
   }
   refreshList()
 }

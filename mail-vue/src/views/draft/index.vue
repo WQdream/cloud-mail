@@ -67,8 +67,10 @@ watch(() => draftStore.setDraft, async () => {
 
 watch(() => draftStore.refreshList, async () => {
   const {list} = await getEmailList();
+  if (scroll.value) {
     scroll.value.emailList.length = 0
     scroll.value.emailList.push(...list)
+  }
 })
 
 function getEmailList() {
@@ -92,7 +94,7 @@ async function jumpContent(email) {
 
 function cancelStar(email) {
   emailStore.cancelStarEmailId = email.emailId
-  scroll.value.deleteEmail([email.emailId])
+  scroll.value?.deleteEmail([email.emailId])
 }
 
 onMounted(() => {

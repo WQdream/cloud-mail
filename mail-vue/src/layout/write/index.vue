@@ -288,7 +288,7 @@ function resetForm() {
   backReply.subject = ''
   backReply.receiveEmail = []
   backReply.sendType = ''
-  editor.value.clearEditor()
+  editor.value?.clearEditor()
 }
 
 function change(content, text) {
@@ -324,7 +324,7 @@ function openReply(email) {
     open()
 
     nextTick(() => {
-      backReply.content = editor.value.getContent()
+      backReply.content = editor.value?.getContent() || ''
       backReply.subject = form.subject
       backReply.receiveEmail = form.receiveEmail
       backReply.sendType = form.sendType
@@ -350,7 +350,7 @@ function open() {
     form.name = accountStore.currentAccount.name;
   }
   show.value = true;
-  editor.value.focus()
+  editor.value?.focus()
 }
 
 function openDraft(draft) {
@@ -358,7 +358,7 @@ function openDraft(draft) {
   defValue.value = ''
   setTimeout(() => defValue.value = form.content)
   show.value = true;
-  editor.value.focus()
+  editor.value?.focus()
 }
 
 const handleKeyDown = (event) => {
@@ -392,7 +392,7 @@ function close() {
 
   if (backReply.sendType === 'reply') {
     let subjectFlag = form.subject === backReply.subject
-    let contentFlag = editor.value.getContent() === backReply.content
+    let contentFlag = (editor.value?.getContent() || '') === backReply.content
     let receiveFlag = form.receiveEmail.length === 1 && form.receiveEmail[0] === backReply.receiveEmail[0]
     if (subjectFlag && contentFlag && receiveFlag) {
       resetForm();
