@@ -125,7 +125,7 @@ const zh = {
     emailCount: '共 {total} 封',
     error404: '404错误, 找不到页面',
     home: '返回首页',
-    loginBtn: '登录',
+    loginBtn: '登录666',
     regBtn: '注册',
     loginTitle: '输入账号信息以开始使用邮箱系统',
     regTitle: '输入账号密码以开始注册邮箱系统',
