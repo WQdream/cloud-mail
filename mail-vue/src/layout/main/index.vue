@@ -91,7 +91,7 @@ onBeforeUnmount(() => {
 })
 
 const handleResize = () => {
-  if (['content','email','send'].includes(route.meta.name)) {
+  if (route.meta && route.meta.name && ['content','email','send'].includes(route.meta.name)) {
     if (innerWidth !==  window.innerWidth) {
       innerWidth = window.innerWidth;
       uiStore.accountShow = window.innerWidth >= 767;

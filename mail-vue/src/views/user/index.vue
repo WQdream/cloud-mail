@@ -365,13 +365,17 @@ const filterItem = reactive({
 
 function tableFilter(e) {
 
-  if (e.send) filterItem.send = e.send
-  if (e.account) filterItem.account = e.account
-  if (e.receive) filterItem.receive = e.receive
+  if (e.send && Array.isArray(e.send)) filterItem.send = e.send
+  if (e.account && Array.isArray(e.account)) filterItem.account = e.account
+  if (e.receive && Array.isArray(e.receive)) filterItem.receive = e.receive
 
 }
 
 function formatterSend(e) {
+
+  if (!filterItem.send || !Array.isArray(filterItem.send)) {
+    return 0
+  }
 
   if (filterItem.send.length === 2) {
     return e.sendEmailCount + e.delSendEmailCount
@@ -390,6 +394,10 @@ function formatterSend(e) {
 
 function formatterAccount(e) {
 
+  if (!filterItem.account || !Array.isArray(filterItem.account)) {
+    return 0
+  }
+
   if (filterItem.account.length === 2) {
     return e.accountCount + e.delAccountCount
   }
@@ -407,6 +415,9 @@ function formatterAccount(e) {
 
 function formatterReceive(e) {
 
+  if (!filterItem.receive || !Array.isArray(filterItem.receive)) {
+    return 0
+  }
 
   if (filterItem.receive.length === 2) {
     return e.receiveEmailCount + e.delReceiveEmailCount

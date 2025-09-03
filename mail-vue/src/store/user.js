@@ -3,7 +3,9 @@ import {loginUserInfo} from "@/request/my.js";
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        user: {},
+        user: {
+            permKeys: []
+        },
         refreshList: 0,
     }),
     actions: {

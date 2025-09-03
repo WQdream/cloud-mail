@@ -6,7 +6,7 @@ export default {
         const permKeys = userStore.user.permKeys;
         const value = binding.value;
 
-        if (permKeys.includes('*')) {
+        if (!permKeys || permKeys.includes('*')) {
             return;
         }
 
@@ -22,12 +22,14 @@ export default {
 
 export function hasPerm(permKey) {
     const {permKeys} = useUserStore().user;
-    return permKeys.includes('*') || permKeys.includes(permKey);
+    return permKeys && (permKeys.includes('*') || permKeys.includes(permKey));
 }
 
 
 export function permsToRouter(permKeys) {
     const routerList = []
+    if (!permKeys) return routerList;
+    
     Object.keys(routers).forEach(perm => {
         if (permKeys.includes(perm) || permKeys.includes('*')) {
             routerList.push(...routers[perm])
