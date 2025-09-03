@@ -21,8 +21,18 @@ const init = {
 		await this.v1_5DB(c);
 		await this.v1_6DB(c);
 		await this.v1_7DB(c);
+		await this.v1_8DB(c);
 		await settingService.refresh(c);
 		return c.text(t('initSuccess'));
+	},
+
+	async v1_8DB(c) {
+		// 添加 account 表的 remark 字段
+		try {
+			await c.env.db.prepare(`ALTER TABLE account ADD COLUMN remark TEXT NOT NULL DEFAULT '';`).run();
+		} catch (e) {
+			console.warn(`跳过字段添加，原因：${e.message}`);
+		}
 	},
 
 	async v1_7DB(c) {
@@ -440,6 +450,8 @@ const init = {
       CREATE TABLE IF NOT EXISTS account (
         account_id INTEGER PRIMARY KEY AUTOINCREMENT,
         email TEXT NOT NULL,
+        name TEXT NOT NULL DEFAULT '',
+        remark TEXT NOT NULL DEFAULT '',
         status INTEGER DEFAULT 0 NOT NULL,
         latest_email_time DATETIME,
         create_time DATETIME DEFAULT CURRENT_TIMESTAMP,
